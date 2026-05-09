@@ -1,23 +1,28 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --text: #3a3f47;              /* dark gray text */
+  --text-h: #1b1f24;            /* heading text */
+  --bg: #f5f7fa;                /* soft light gray background */
+  --border: #d9e1e8;            /* subtle border */
+  --code-bg: #e8f0f7;           /* light blue-gray */
+  /* Accent colors */
+  --accent: #2686bde6;          /* soft medical blue */
+  --accent-light: #56ccf2;      
+  --accent-bg: rgba(45, 156, 219, 0.12);
+  --accent-border: rgba(45, 156, 219, 0.4);
+  /* UI elements */
+  --social-bg: rgba(230, 240, 250, 0.5);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.06) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.03) 0 4px 6px -2px;
 
+  /* Typography */
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -32,18 +37,22 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
+     --text: #cfd6dd;
+    --text-h: #ffffff;
+    --bg: #1c1f24;
+    --border: #2c3238;
+    --code-bg: #2a3038;
+
+    --accent: #56ccf2;          /* turquoise in dark mode */
+    --accent-light: #2d9cdb;
+    --accent-bg: rgba(86, 204, 242, 0.15);
+    --accent-border: rgba(86, 204, 242, 0.5);
+
+    --social-bg: rgba(60, 70, 80, 0.4);
     --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
+      rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    }
 
   #social .button-icon {
     filter: invert(1) brightness(2);
@@ -52,6 +61,7 @@
 
 body {
   margin: 0;
+  background: var(--bg);
 }
 
 #root {
@@ -69,16 +79,18 @@ body {
 h1,
 h2 {
   font-family: var(--heading);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-h);
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
+  font-size: 48px;
+  letter-spacing: -1px;
   margin: 32px 0;
+  color: var(--accent);
+
   @media (max-width: 1024px) {
-    font-size: 36px;
+    font-size: 32px;
     margin: 20px 0;
   }
 }
@@ -86,7 +98,9 @@ h2 {
   font-size: 24px;
   line-height: 118%;
   letter-spacing: -0.24px;
-  margin: 0 0 8px;
+  margin: 0 0 12px;
+  color: var(--text-h);
+
   @media (max-width: 1024px) {
     font-size: 20px;
   }
@@ -108,4 +122,74 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+.split-container {
+  display: flex;
+  height: 100vh;
+}
+
+.split-panel {
+  flex: 1;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease;
+  cursor: pointer;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.split-panel:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: scale(1.02);
+  box-shadow: var(--shadow);
+}
+
+.split-left {
+  background: linear-gradient(
+    to bottom right,
+    var(--accent) 0%,
+    var(--accent-light) 100%
+  );
+  color: white;
+}
+
+.split-right {
+  background: linear-gradient(
+    to bottom right,
+    #56ccf2 0%,
+    #2d9cdb 100%
+  );
+  color:white;
+}
+
+.split-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.split-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 200px;
+}
+
+.split-buttons button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.split-buttons button:hover {
+  background: var(--accent);
+  color: white;
 }
