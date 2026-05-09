@@ -21,7 +21,7 @@ login.post("/", async (req, res, next) => {
     if (users.length === 0)
       return res.status(401).json({ error: "Invalid email" })
 
-    const user = users[0]
+    const user = users[0] //mySQL returns an array of results, we want the first one (the only one) since email is unique
 
     // Compare passwords
     const match = await bcrypt.compare(password, user.password)
