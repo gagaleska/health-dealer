@@ -1,0 +1,90 @@
+.register-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--luna-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.register-card {
+  width: 360px;
+  padding: 32px;
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.register-title {
+  margin-bottom: 20px;
+  color: var(--luna-dark);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.register-input {
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-size: 16px;
+}
+
+.register-button {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: var(--radius);
+  border: none;
+  background: var(--luna-blue);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background: var(--luna-dark);
+}
+
+/* ===== BACKGROUND CIRCLES ===== */
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.45;
+  z-index: 0;
+}
+
+/* Top-left turquoise circle */
+.bg-circle-1 {
+  width: 260px;
+  height: 260px;
+  background: var(--luna-light);
+  top: -80px;
+  left: -80px;
+}
+
+/* Bottom-right deep blue circle */
+.bg-circle-2 {
+  width: 320px;
+  height: 320px;
+  background: var(--luna-blue);
+  bottom: -120px;
+  right: -120px;
+}
+
+/* Optional third circle for extra depth */
+.bg-circle-3 {
+  width: 200px;
+  height: 200px;
+  background: var(--luna-mid);
+  top: 40%;
+  left: 70%;
+}

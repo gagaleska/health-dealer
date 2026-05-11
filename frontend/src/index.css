@@ -1,19 +1,28 @@
 :root {
-  --text: #3a3f47;              /* dark gray text */
+  --luna-light:#A7EBF2;
+  --luna-mid: #54ACBF;
+  --luna-blue: #26658C;
+  --luna-dark: #023859;
+  --luna-deep: #011C40;
+
+  --text: #2e353d;             /* dark gray text */
+  --text-light: #3a3f47;        /* lighter gray for secondary text */
   --text-h: #1b1f24;            /* heading text */
   --bg: #f5f7fa;                /* soft light gray background */
   --border: #d9e1e8;            /* subtle border */
   --code-bg: #e8f0f7;           /* light blue-gray */
   /* Accent colors */
-  --accent: #2686bde6;          /* soft medical blue */
-  --accent-light: #56ccf2;      
-  --accent-bg: rgba(45, 156, 219, 0.12);
+  --accent: var(--luna-blue);          /* soft medical blue */
+  --accent-light: var(--luna-mid);   
+  --accent-bg: rgba(38, 101, 140, 0.12);
   --accent-border: rgba(45, 156, 219, 0.4);
   /* UI elements */
   --social-bg: rgba(230, 240, 250, 0.5);
   --shadow:
     rgba(0, 0, 0, 0.06) 0 10px 15px -3px,
     rgba(0, 0, 0, 0.03) 0 4px 6px -2px;
+
+  --radius: 14px;
 
   /* Typography */
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -64,16 +73,30 @@ body {
   background: var(--bg);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
   text-align: center;
-  border-inline: 1px solid var(--border);
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
 }
 
 h1,
