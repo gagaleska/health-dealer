@@ -51,4 +51,4 @@ register.post("/", async (req, res, next) => {
     }
 })
 
-module.exports = register;
+module.exports = register

@@ -58,12 +58,12 @@ dataPool.AddUserMedication = (user_id, medication_id, dosage, schedule_time, wit
 
 // Get all medication schedules for a user
 dataPool.GetUserMedication = (user_id) => {
-  return new Promise((reolve, reject) => {
+  return new Promise((resolve, reject) => {
     conn.query(
       'SELECT um.*, m.name AS medication_name FROM UserMedication um JOIN Medication m ON um.medication_id = m.id WHERE um.user_id = ?',
       [user_id],
       (err, res) => {
-        if (err) return reject(err)
+        if(err) return reject(err)
         resolve(res)
       }
     )
