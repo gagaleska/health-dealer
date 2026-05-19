@@ -159,4 +159,20 @@ dataPool.DeleteUserMedication = (id) => {
   }) 
 }
 
+// Set a medication schedule as taken
+dataPool.MarkScheduleTaken = (scheduleId, userId) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      "UPDATE UserMedication SET taken = 1 WHERE id = ? AND user_id = ?",
+      [scheduleId, userId],
+      (err, res) => {
+        if (err) return reject(err);
+        resolve(res);
+      }
+    );
+  });
+};
+
+
+
 module.exports = dataPool

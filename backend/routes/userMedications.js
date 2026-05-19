@@ -106,4 +106,16 @@ userMed.delete("/:id", auth, async (req, res) => {
   }
 })
 
+// MARK as taken
+userMed.post("/:id/taken", auth, async (req, res) => {
+  try {
+    await db.MarkScheduleTaken(req.params.id, req.user.id)
+    res.json({ message: "Marked as taken" })
+  } catch (err) {
+    console.error("Error marking taken:", err)
+    res.status(500).json({ error: "Server error" })
+  }
+})
+
+
 module.exports = userMed
