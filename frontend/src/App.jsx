@@ -3,7 +3,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Dashboard from "./pages/Dashboard"
-import CreateSchedule from "./pages/Schedule"
+import CreateSchedule from "./pages/CreateSchedule"
 import MySchedules from "./pages/MySchedules"
 
 function App() {

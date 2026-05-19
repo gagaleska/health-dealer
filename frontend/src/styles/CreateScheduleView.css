@@ -1,0 +1,96 @@
+.create-schedule-wrapper {
+  min-height: 100vh;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CARD */
+.create-schedule-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 2;
+}
+
+/* TITLE */
+.create-schedule-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--luna-dark);
+}
+
+/* INPUTS */
+.create-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid var(--luna-light);
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  color: var(--luna-dark);
+}
+
+.create-input:focus {
+  outline: none;
+  border-color: var(--luna-blue);
+}
+
+/* TIME TAGS */
+.time-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--luna-blue);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.time-tag button {
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* ADD TIME BUTTON */
+.add-time-btn {
+  padding: 8px 14px;
+  background: var(--luna-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.add-time-btn:hover {
+  background: var(--luna-dark);
+}
+
+/* SUBMIT BUTTON */
+.create-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--luna-green);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.create-submit-btn:hover {
+  background: var(--luna-dark-green);
+}

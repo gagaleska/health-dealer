@@ -1,0 +1,93 @@
+/* WRAPPER */
+.schedule-wrapper {
+  min-height: 100vh;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* TITLE */
+.schedule-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: var(--luna-dark);
+}
+
+/* LIST */
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* MEDICATION CARD */
+.med-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 2;
+}
+
+/* MEDICATION NAME */
+.med-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--luna-blue);
+}
+
+/* DOSAGE */
+.med-dosage {
+  font-size: 16px;
+  color: var(--luna-mid);
+  margin-bottom: 10px;
+}
+
+/* WITH FOOD */
+.med-food {
+  font-size: 14px;
+  color: var(--luna-orange);
+  margin-bottom: 10px;
+}
+
+/* TIME LIST */
+.time-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* TIME ROW */
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* TIME LABEL */
+.time-label {
+  font-size: 18px;
+  color: var(--luna-dark);
+}
+
+/* TAKEN BUTTON */
+.taken-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--luna-blue);
+  color: white;
+  transition: 0.2s ease;
+}
+
+.taken-btn:hover {
+  background: var(--luna-dark);
+}
+
+.taken-btn.taken {
+  background: var(--luna-green);
+}
