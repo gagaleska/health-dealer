@@ -1,18 +1,38 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api/axios";
 import "../styles/LoginView.css";
 
 export default function Login() {
-  const [role, setRole] = useState("doctor");
+  const [role, setRole] = useState("");
   const [form, setForm] = useState({ email: "", password: "" });
-
+  const navigate = useNavigate();
+  
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(`${role} login:`, form);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const res = await api.post("/login", {
+        email: form.email,
+        password: form.password,
+        role: role,
+      })
+
+      // Save token
+      localStorage.setItem("token", res.data.token)
+
+      // Redirect to dashboard
+      navigate("/dashboard")
+
+    } catch (err) {
+      console.error("Login error:", err)
+      alert("Invalid credentials")
+    }
+  }
 
   return (
     <div className="login-wrapper">

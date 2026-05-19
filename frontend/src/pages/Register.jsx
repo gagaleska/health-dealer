@@ -1,5 +1,7 @@
-import { useState } from "react";
-import "../styles/RegisterView.css";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import api from "../api/axios"
+import "../styles/RegisterView.css"
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -8,15 +10,47 @@ export default function Register() {
     email: "",
     password: "",
     doctor_code: ""
-  });
+  })
+  const [message, setMessage] = useState("")
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Register:", form);
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const payload = {
+        first_name: form.first_name,
+        last_name: form.last_name,
+        email: form.email,
+        password: form.password,
+      }
+
+      if (form.doctor_code.trim()) {
+        payload.doctor_code = form.doctor_code.trim()
+      }
+
+      await api.post("/register", payload)
+
+      navigate("/")
+    } catch (err) {
+      console.error("Register error:", err)
+      const errors = err.response?.data?.errors;
+      const validationMessage = errors
+        ? Object.values(errors).flat().join(" ")
+        : ""
+
+      setMessage(
+        validationMessage ||
+        err.response?.data?.message ||
+          err.response?.data?.error ||
+          err.message ||
+          "Registration failed. Please check your details and try again."
+      );
+    }
   };
 
   return (
@@ -34,18 +68,22 @@ export default function Register() {
           <input
             name="first_name"
             placeholder="First Name"
+            value={form.first_name}
             onChange={handleChange}
             className="register-input"
           />
           <input
             name="last_name"
             placeholder="Last Name"
+            value={form.last_name}
             onChange={handleChange}
             className="register-input"
           />
           <input
             name="email"
+            type="email"
             placeholder="Email"
+            value={form.email}
             onChange={handleChange}
             className="register-input"
           />
@@ -53,12 +91,14 @@ export default function Register() {
             name="password"
             type="password"
             placeholder="Password"
+            value={form.password}
             onChange={handleChange}
             className="register-input"
           />
           <input
             name="doctor_code"
             placeholder="Doctor Code (optional)"
+            value={form.doctor_code}
             onChange={handleChange}
             className="register-input"
           />
@@ -67,6 +107,8 @@ export default function Register() {
             Register
           </button>
         </form>
+
+        {message && <p className="register-message">{message}</p>}
       </div>
     </div>
   );
