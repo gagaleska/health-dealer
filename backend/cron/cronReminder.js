@@ -9,8 +9,7 @@ cron.schedule("* * * * *", async () => {
 
     const now = new Date()
 
-    // current time + 1 minute (for testing)
-    const target = new Date(now.getTime() + 1 * 60000)
+    const target = new Date(now.getTime() + 15 * 60000)
 
     const targetTime = target.toTimeString().slice(0,5)
 
@@ -73,3 +72,4 @@ cron.schedule("* * * * *", async () => {
     console.error("Reminder cron error:", err)
   }
 })
+
