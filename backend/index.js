@@ -5,6 +5,8 @@ const cors = require("cors")
 const register = require("./routes/register")
 const login = require("./routes/login")
 const userMedications = require("./routes/userMedications")
+require("./cron/cronReminder")
+require("./cron/cronMedication")
 
 
 const app = express() // instance of express

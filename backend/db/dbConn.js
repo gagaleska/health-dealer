@@ -219,5 +219,37 @@ dataPool.MarkScheduleTaken = (scheduleTimeId, userId) => {
   })
 }
 
+dataPool.GetUpcomingReminders = (targetTime) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `SELECT
+        u.email,
+        u.first_name,
+        m.name AS medication_name,
+        um.dosage,
+        um.with_food,
+        st.schedule_time
+      FROM ScheduleTime st
+      JOIN UserMedication um
+        ON st.user_medication_id = um.id
+      JOIN Medication m
+        ON um.medication_id = m.id
+      JOIN User u
+        ON um.user_id = u.id
+      WHERE TIME_FORMAT(st.schedule_time, '%H:%i') = ?
+      AND (
+        um.end_date IS NULL
+        OR um.end_date >= CURDATE()
+      )`,
+      [targetTime],
+      (err, res) => {
+        if (err) return reject(err)
+
+        resolve(res)
+      }
+    )
+  })
+}
+
 
 module.exports = dataPool

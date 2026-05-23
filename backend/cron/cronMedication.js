@@ -1,21 +1,26 @@
-import cron from "node-cron"
-import db from ("../db/dbConn")
+const cron = require("node-cron")
+const db = require("../db/dbConn")
 
 cron.schedule("0 0 * * *", async () => {
   try {
     // Reset taken only if medication is still active
     await db.query(`
-      UPDATE UserMedication
-      SET taken = 0
-      WHERE taken = 1
-        AND taken_date < CURDATE()
-        AND end_date >= CURDATE();
-    `)
+      UPDATE ScheduleTime st
+      JOIN UserMedication um ON st.user_medication_id = um.id
+      SET st.taken = 0,
+      st.taken_date = NULL
+      WHERE st.taken = 1
+        AND (
+    um.end_date IS NULL
+    OR um.end_date >= CURDATE()
+)`)
 
     // Delete expired medications
     await db.query(`
-      DELETE FROM UserMedication
-      WHERE end_date < CURDATE();
+      DELETE um
+FROM UserMedication um
+WHERE um.end_date IS NOT NULL
+AND um.end_date < CURDATE();
     `)
 
 
@@ -24,3 +29,5 @@ cron.schedule("0 0 * * *", async () => {
     console.error("Cron job error:", err)
   }
 })
+
+
