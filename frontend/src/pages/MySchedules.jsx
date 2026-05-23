@@ -5,6 +5,8 @@ import "../styles/MyScheduleView.css"
 export default function MySchedules() {
   const [schedules, setSchedules] = useState([])
 
+  const today = new Date().toLocaleDateString("en-CA")
+
   useEffect(() => {
     fetchSchedules()
   }, [])
@@ -24,6 +26,7 @@ export default function MySchedules() {
   const markTaken = async (scheduleId) => {
     try {
       await api.post(`/user-medications/${scheduleId}/taken`)
+      alert("Medication marked as taken!");
       fetchSchedules()
     } catch (err) {
       console.error("Error marking taken:", err)
@@ -34,21 +37,24 @@ export default function MySchedules() {
 
   // GROUP BY MEDICATION
   const grouped = schedules.reduce((acc, item) => {
-    const medId = item.medication_id || item.med_id || item.id
+    const medId = item.medication_id
 
     if (!acc[medId]) {
       acc[medId] = {
         medication_name: item.medication_name,
         dosage: item.dosage,
         with_food: item.with_food,
+        start_date: item.start_date,
+        end_date: item.end_date,
         times: []
       }
     }
 
     acc[medId].times.push({
-      schedule_id: item.schedule_id || item.id,
+      id: item.schedule_time_id,
       time: item.schedule_time,
-      taken: item.taken
+      taken: item.taken,
+      taken_date: item.taken_date
     })
 
     return acc
@@ -81,18 +87,33 @@ export default function MySchedules() {
             {med.with_food && <p className="med-food">Take with food</p>}
 
             <div className="time-list">
-              {med.times.map((t) => (
-                <div className="time-row" key={t.schedule_id}>
-                  <span className="time-label">{t.time}</span>
+              {med.times.map((t) => {
+                const isTakenToday =
+                  Number(t.taken) === 1 &&
+                  t.taken_date &&
+                  new Date(t.taken_date).toLocaleDateString("en-CA") === new Date().toLocaleDateString("en-CA")
+                
 
-                  <button
-                    className={`taken-btn ${t.taken ? "taken" : ""}`}
-                    onClick={() => markTaken(t.schedule_id)}
-                  >
-                    {t.taken ? "Taken ✔" : "Take"}
-                  </button>
-                </div>
-              ))}
+                console.log("BUTTON DATA:", {
+                  taken: t.taken,
+                  taken_date: t.taken_date,
+                  today
+        })
+                return (
+                  <div className="time-row" key={`${t.id}-${t.time}`}>
+                    <span className="time-label">{t.time}</span>
+
+                    <button
+                      className={`taken-btn ${isTakenToday ? "taken" : ""}`}
+                      onClick={() => markTaken(t.id)}
+                      disabled={isTakenToday}>
+            
+                      {isTakenToday ? "Taken ✔" : "Take"}
+
+                    </button>
+                  </div>
+                )
+              })}
             </div>
           </div>
         ))}

@@ -74,20 +74,35 @@
 }
 
 /* TAKEN BUTTON */
+/* TAKEN BUTTON */
 .taken-btn {
-  padding: 6px 14px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #4a90e2, #357ab8);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
-  background: var(--luna-blue);
-  color: white;
-  transition: 0.2s ease;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  min-width: 95px;
+  box-shadow: 0 3px 10px rgba(53, 122, 184, 0.25);
 }
 
-.taken-btn:hover {
-  background: var(--luna-dark);
+.taken-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(53, 122, 184, 0.35);
 }
 
+/* TAKEN STATE */
 .taken-btn.taken {
-  background: var(--luna-green);
+  background: linear-gradient(135deg, #4CAF50, #43a047);
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.9;
+  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.25);
+}
+
+/* DISABLED */
+.taken-btn:disabled {
+  pointer-events: none;
 }
