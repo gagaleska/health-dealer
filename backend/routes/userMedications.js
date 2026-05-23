@@ -75,18 +75,19 @@ userMed.get("/", auth, async (req, res) => {
 // UPDATE schedule
 userMed.put("/:id", auth, async (req, res) => {
   try {
-    const { dosage, schedule_time, with_food, frequency } = req.body
+    const { dosage, with_food, start_date, end_date, schedule_times } = req.body
 
-    if (!dosage || !start_date || !end_date)
+    if (!dosage || !start_date || !end_date || !Array.isArray(schedule_times))
       return res.status(400).json({ error: "Missing required fields" })
 
     await db.UpdateUserMedication(
       req.params.id,
       dosage,
-      schedule_time,
       with_food,
-      frequency
-    )
+      start_date,
+      end_date,
+      schedule_times
+)
 
     res.json({ message: "Medication schedule updated" })
   } catch (err) {
@@ -116,6 +117,5 @@ userMed.post("/:id/taken", auth, async (req, res) => {
     res.status(500).json({ error: "Server error" })
   }
 })
-
 
 module.exports = userMed

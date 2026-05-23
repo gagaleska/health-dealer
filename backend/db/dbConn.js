@@ -81,9 +81,9 @@ dataPool.AddUserSchedule = async (user_id, medication_name, dosage, with_food, s
 
       // Step 2: Check if the schedule already exists
       const [existingSchedule] = await conn.promise().query(
-        'SELECT id FROM UserMedication WHERE user_id = ? AND medication_id = ? AND start_date = ? AND end_date = ?',
-        [user_id, medication_id, start_date, end_date]
-      )
+        'SELECT id FROM UserMedication WHERE user_id = ? AND medication_id = ?',
+      [user_id, medication_id]
+    )
 
       if (existingSchedule.length > 0) {
         return reject(new Error("A schedule for this medication already exists for the given user and date range."))
@@ -114,15 +114,35 @@ dataPool.AddUserSchedule = async (user_id, medication_name, dosage, with_food, s
 }
 
 // Get all medication schedules for a user
+// Get all medication schedules for a user
 dataPool.GetUserMedication = (user_id, today) => {
   return new Promise((resolve, reject) => {
     conn.query(
-      `SELECT um.*, m.name AS medication_name, st.schedule_time 
-       FROM UserMedication um 
-       JOIN Medication m ON um.medication_id = m.id 
-       LEFT JOIN ScheduleTime st ON um.id = st.user_medication_id
-       WHERE um.user_id = ? AND ? BETWEEN um.start_date AND um.end_date`,
-      [user_id, today],
+      `SELECT 
+        um.id AS user_medication_id,
+        st.id AS schedule_time_id,
+        um.medication_id,
+        um.dosage,
+        um.with_food,
+        um.start_date,
+        um.end_date,
+        st.taken,
+        st.taken_date,
+        m.name AS medication_name,
+        st.schedule_time
+       FROM UserMedication um
+       JOIN Medication m 
+          ON um.medication_id = m.id
+       JOIN ScheduleTime st 
+          ON um.id = st.user_medication_id
+       WHERE um.user_id = ?
+       AND (
+          (? >= um.start_date AND ? <= um.end_date)
+          OR
+          (um.end_date IS NULL AND ? >= um.start_date)
+       )
+       ORDER BY m.name, st.schedule_time`,
+      [user_id, today, today, today],
       (err, res) => {
         if (err) return reject(err)
         resolve(res)
@@ -132,18 +152,38 @@ dataPool.GetUserMedication = (user_id, today) => {
 }
 
 // Update a medication schedule for a user
-dataPool.UpdateUserMedication = (id, dosage, schedule_time, with_food, frequency) => {
-  return new Promise((resolve, reject) => {
-     conn.query(
-      'UPDATE UserMedication SET dosage = ?, schedule_time = ?, with_food = ?, start_date = ?, end_date = ? WHERE id = ?',
-      [dosage, with_food, start_date, end_date, id],
-      (err, res) => {
-        if(err) return reject(err)
-        resolve(res)
+dataPool.UpdateUserMedication = (id, dosage, with_food, start_date, end_date, schedule_times) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // Update the main schedule info
+      await conn.promise().query(
+        `UPDATE UserMedication 
+         SET dosage = ?, with_food = ?, start_date = ?, end_date = ?
+         WHERE id = ?`,
+        [dosage, with_food, start_date, end_date, id]
+      )
+
+      // Delete old schedule times
+      await conn.promise().query(
+        `DELETE FROM ScheduleTime WHERE user_medication_id = ?`,
+        [id]
+      )
+
+      // Insert new schedule times
+      if (schedule_times && schedule_times.length > 0) {
+        const values = schedule_times.map(time => [id, time])
+        await conn.promise().query(
+          `INSERT INTO ScheduleTime (user_medication_id, schedule_time) VALUES ?`,
+          [values]
+        )
       }
-    )
+      resolve({ message: "Medication schedule updated successfully" })
+    } catch (err) {
+      reject(err)
+    }
   })
 }
+
 
 // Delete a medication schedule for a user
 dataPool.DeleteUserMedication = (id) => {
@@ -160,19 +200,24 @@ dataPool.DeleteUserMedication = (id) => {
 }
 
 // Set a medication schedule as taken
-dataPool.MarkScheduleTaken = (scheduleId, userId) => {
+dataPool.MarkScheduleTaken = (scheduleTimeId, userId) => {
   return new Promise((resolve, reject) => {
     conn.query(
-      "UPDATE UserMedication SET taken = 1 WHERE id = ? AND user_id = ?",
-      [scheduleId, userId],
+      `UPDATE ScheduleTime st
+       JOIN UserMedication um
+          ON st.user_medication_id = um.id
+       SET st.taken = 1,
+           st.taken_date = CURDATE()
+       WHERE st.id = ?
+       AND um.user_id = ?`,
+      [scheduleTimeId, userId],
       (err, res) => {
-        if (err) return reject(err);
-        resolve(res);
+        if (err) return reject(err)
+        resolve(res)
       }
-    );
-  });
-};
-
+    )
+  })
+}
 
 
 module.exports = dataPool
