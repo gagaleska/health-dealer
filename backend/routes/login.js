@@ -10,10 +10,10 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 login.post("/", async (req, res, next) => {
   try {
-    const { email, password } = req.body
+    const { email, password, role } = req.body
 
     // Validate input
-    if (!email || !password)
+    if (!email || !password || role === undefined)
       return res.status(400).json({ error: "Missing email or password" })
 
     // Find user by email
@@ -26,6 +26,21 @@ login.post("/", async (req, res, next) => {
     // Compare passwords
     const match = await bcrypt.compare(password, user.password)
     if (!match) return res.status(401).json({ error: "Invalid password" })
+
+
+    console.log("DATABASE ROLE:", user.role)
+    console.log("FRONTEND ROLE:", role)
+    console.log("NUMBER ROLE:", Number(role))
+
+
+    // Role check
+    if(user.role !== Number(role)) 
+      return res.status(403).json({
+        error:
+          Number(role)===1
+            ? "This account is not registered as a doctor"
+            : "This account is not registered as a patient"
+      })
 
     // Create JWT token 
     const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, {

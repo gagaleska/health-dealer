@@ -2,7 +2,7 @@ const cron = require("node-cron")
 const db = require("../db/dbConn")
 const sendEmail = require("../utils/sendEmail")
 
-cron.schedule("* * * * *", async () => {
+cron.schedule("*/15 * * * *", async () => {
   try {
 
     console.log("Checking reminders...")
