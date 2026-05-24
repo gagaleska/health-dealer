@@ -8,7 +8,6 @@ const sendEmail = require("../utils/sendEmail")
 const JWT_SECRET = process.env.JWT_SECRET
 
 reset.use(express.json())
-console.log("RESET PASSWORD ROUTE LOADED")
 
 // Request email for password reset
 reset.post("/request", async (req, res) => {

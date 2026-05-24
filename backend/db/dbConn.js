@@ -77,7 +77,7 @@ dataPool.AddMedication = (name) => {
 dataPool.AddUserSchedule = async (user_id, medication_name, dosage, with_food, start_date, end_date, schedule_times) => {
   return new Promise(async (resolve, reject) => {
     try {
-      // Step 1: Check if the medication exists
+      // Check if the medication exists
       let [medication] = await conn.promise().query(
         'SELECT id FROM Medication WHERE name = ?',
         [medication_name]
@@ -95,7 +95,7 @@ dataPool.AddUserSchedule = async (user_id, medication_name, dosage, with_food, s
         medication_id = medication[0].id
       }
 
-      // Step 2: Check if the schedule already exists
+      // Check if the schedule already exists
       const [existingSchedule] = await conn.promise().query(
         'SELECT id FROM UserMedication WHERE user_id = ? AND medication_id = ?',
       [user_id, medication_id]
@@ -105,7 +105,7 @@ dataPool.AddUserSchedule = async (user_id, medication_name, dosage, with_food, s
         return reject(new Error("A schedule for this medication already exists for the given user and date range."))
       }
 
-      // Step 3: Insert into UserMedication
+      // Insert into UserMedication
       const [userMedicationResult] = await conn.promise().query(
         'INSERT INTO UserMedication (user_id, medication_id, dosage, with_food, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)',
         [user_id, medication_id, dosage, with_food, start_date, end_date || null]
@@ -113,7 +113,7 @@ dataPool.AddUserSchedule = async (user_id, medication_name, dosage, with_food, s
 
       const user_medication_id = userMedicationResult.insertId
 
-      // Step 4: Insert schedule times into ScheduleTime
+      // Insert schedule times into ScheduleTime
       if (schedule_times.length > 0) {
         const scheduleTimeValues = schedule_times.map((time) => [user_medication_id, time])
         await conn.promise().query(
@@ -129,7 +129,6 @@ dataPool.AddUserSchedule = async (user_id, medication_name, dosage, with_food, s
   })
 }
 
-// Get all medication schedules for a user
 // Get all medication schedules for a user
 dataPool.GetUserMedication = (user_id, today) => {
   return new Promise((resolve, reject) => {
@@ -267,5 +266,63 @@ dataPool.GetUpcomingReminders = (targetTime) => {
   })
 }
 
+// Add emergency contact
+dataPool.AddEmergencyContact = (user_id, contact_name, contact_email) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `INSERT INTO Emergency_Contact (user_id, contact_name, contact_email)
+      VALUES (?, ?, ?)`,
+      [user_id, contact_name, contact_email],
+      (err, res) => {
+        if (err) return reject(err)
+        resolve(res)
+      }
+    )
+  })
+}
+
+dataPool.GetEmergencyContact = (user_id) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `SELECT * FROM Emergency_Contact
+      WHERE user_id = ?`,
+      [user_id],
+      (err, res) => {
+        if(err) return reject(err)
+          resolve(res)
+      }
+    )
+  })
+}
+
+dataPool.GetMissedMedications = () => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `SELECT
+        u.id AS user_id,
+        u.first_name,
+        u.email,
+        ec.contact_email,
+        ec.contact_name,
+        COUNT(st.id) AS missed_count
+      FROM ScheduleTime st
+      JOIN UserMedication um
+      ON st.user_medication_id = um.id
+      JOIN User u
+      ON um.user_id = u.id
+      JOIN Emergency_Contact ec
+      ON ec.user_id = u.id
+      WHERE
+        st.taken = 0
+        AND st.schedule_time < CURTIME()
+      GROUP BY u.id
+      HAVING missed_count >= 3`,
+      (err, res) => {
+        if (err) return reject(err)
+        resolve(res)
+      }
+    )
+  })
+}
 
 module.exports = dataPool

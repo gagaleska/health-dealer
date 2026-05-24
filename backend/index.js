@@ -6,8 +6,10 @@ const register = require("./routes/register")
 const login = require("./routes/login")
 const userMedications = require("./routes/userMedications")
 const resetPassword = require("./routes/resetPassword")
+const emergencyContact = require("./routes/emergencyContact")
 require("./cron/cronReminder")
 require("./cron/cronMedication")
+require("./cron/cronEmergency")
 
 
 const app = express() // instance of express
@@ -23,6 +25,7 @@ app.use("/register", register)
 app.use("/login", login)
 app.use("/reset-password", resetPassword)
 app.use("/user-medications", userMedications)
+app.use("/emergency-contact", emergencyContact)
 
 app.get("/", (req, res) => {
   res.send("this text must be changed to a static file")
