@@ -4,7 +4,7 @@ import api from "../api/axios";
 import "../styles/LoginView.css";
 
 export default function Login() {
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("0");
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   
@@ -44,8 +44,8 @@ export default function Login() {
           onChange={(e) => setRole(e.target.value)}
           className="login-select"
         >
-          <option value="doctor">Doctor</option>
-          <option value="patient">Patient</option>
+          <option value="1">Doctor</option>
+          <option value="0">Patient</option>
         </select>
 
         <form onSubmit={handleSubmit} className="login-form">
