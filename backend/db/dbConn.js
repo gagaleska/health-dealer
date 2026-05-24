@@ -39,7 +39,23 @@ dataPool.GetUser = (email) => {
       (err, res) => {
       if (err) return reject(err)
       return resolve(res)
-    })
+      }
+    )
+  })
+}
+
+dataPool.UpdatePassword = (userId, hashedPassword) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `UPDATE User
+      SET password = ?
+      WHERE id = ?`,
+      [hashedPassword, userId],
+      (err, res) => {
+        if (err) return reject(err)
+        resolve(res)
+      }
+    )
   })
 }
 

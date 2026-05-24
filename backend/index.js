@@ -5,6 +5,7 @@ const cors = require("cors")
 const register = require("./routes/register")
 const login = require("./routes/login")
 const userMedications = require("./routes/userMedications")
+const resetPassword = require("./routes/resetPassword")
 require("./cron/cronReminder")
 require("./cron/cronMedication")
 
@@ -20,6 +21,7 @@ app.use(cors({
 app.use(express.json())
 app.use("/register", register)
 app.use("/login", login)
+app.use("/reset-password", resetPassword)
 app.use("/user-medications", userMedications)
 
 app.get("/", (req, res) => {
