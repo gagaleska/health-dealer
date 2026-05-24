@@ -1,0 +1,72 @@
+/* WRAPPER */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background:
+    linear-gradient(
+      135deg,
+      #eef6ff,
+      #f9fbff
+    );
+}
+
+/* CARD */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  padding: 40px 30px;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.auth-title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+  color: var(--luna-dark);
+}
+
+/* FORM */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* INPUT */
+.auth-input {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #d6e2f0;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.auth-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74,144,226,0.15);
+}
+
+/* BUTTON */
+.auth-button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.auth-button:hover {
+  background: #357ab8;
+}

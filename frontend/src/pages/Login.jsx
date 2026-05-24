@@ -1,16 +1,17 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import api from "../api/axios";
-import "../styles/LoginView.css";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import api from "../api/axios"
+import "../styles/LoginView.css"
+import { Link } from "react-router-dom"
 
 export default function Login() {
-  const [role, setRole] = useState("0");
-  const [form, setForm] = useState({ email: "", password: "" });
-  const navigate = useNavigate();
+  const [role, setRole] = useState("0")
+  const [form, setForm] = useState({ email: "", password: "" })
+  const navigate = useNavigate()
   
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -70,11 +71,11 @@ export default function Login() {
 
         <p style={{ marginTop: "12px", color: "var(--text-light)" }}>
           Forgot password?{" "}
-          <a href="/reset" className="login-link">
+          <Link to="/reset" className="login-link">
             Reset
-          </a>
+          </Link>
         </p>
       </div>
     </div>
-  );
+  )
 }
