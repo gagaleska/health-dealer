@@ -1,111 +1,169 @@
-/* ===== BACKGROUND ===== */
+/* =========================
+   HOME WRAPPER
+========================= */
 
 .home-wrapper {
+
   min-height: 100svh;
   width: 100%;
-  background:
-    linear-gradient(135deg, rgba(167, 235, 242, 0.92), rgba(245, 247, 250, 0.95) 48%, rgba(84, 172, 191, 0.45)),
-    var(--luna-light);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background:
+    linear-gradient(
+      rgba(245,250,253,0.78),
+      rgba(245,250,253,0.82)
+    ),
+    url("../assets/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-/* Background circles */
+/* =========================
+   FLOATING BLOBS
+========================= */
+
 .bg-circle {
+
   position: absolute;
   border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.32;
+  filter: blur(90px);
+  opacity: 0.22;
   z-index: 0;
   pointer-events: none;
 }
 
 .bg-circle-1 {
-  width: 260px;
-  height: 260px;
-  background: var(--luna-mid);
-  top: -80px;
-  left: -80px;
+  width: 380px;
+  height: 380px;
+  background: var(--luna-light);
+  top: -120px;
+  left: -120px;
 }
 
 .bg-circle-2 {
-  width: 320px;
-  height: 320px;
-  background: var(--luna-blue);
+  width: 340px;
+  height: 340px;
+  background: var(--luna-mid);
   bottom: -120px;
   right: -120px;
 }
 
 .bg-circle-3 {
-  width: 200px;
-  height: 200px;
-  background: var(--luna-dark);
-  top: 40%;
-  left: 70%;
+  width: 260px;
+  height: 260px;
+  background: var(--luna-blue);
+  top: 45%;
+  left: 68%;
 }
 
-/* ===== NAVBAR ===== */
+/* =========================
+   NAVBAR
+========================= */
 
 .home-navbar {
-  width: 100%;
-  padding: 24px clamp(20px, 5vw, 72px);
+
+  width: calc(100% - 56px);
+  margin: 24px auto 0;
+  padding: 18px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  z-index: 2;
+  z-index: 5;
+  background:
+    rgba(255,255,255,0.34);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border:
+    1px solid rgba(255,255,255,0.42);
+  border-radius: 30px;
+  box-shadow:
+    0 12px 30px rgba(1,28,64,0.08);
 }
 
+/* =========================
+   LOGO TEXT
+========================= */
+
 .nav-left {
-  font-size: clamp(20px, 3vw, 26px);
+  font-size: 30px;
   font-weight: 700;
   color: var(--luna-deep);
-  white-space: nowrap;
+  letter-spacing: -1px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
+
+/* =========================
+   NAV RIGHT
+========================= */
 
 .nav-right {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 14px;
 }
+/* =========================
+   NAV BUTTON
+========================= */
 
 .nav-button {
-  min-height: 44px;
-  padding: 10px 18px;
+  height: 50px;
+  padding: 0 22px;
+  border: none;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  background: rgba(255, 255, 255, 0.82);
+  background:
+    rgba(255,255,255,0.52);
   color: var(--luna-dark);
+  font-size: 17px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(1, 28, 64, 0.12);
+  transition: 0.25s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: transform 0.2s ease; 
-  background: 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 6px 18px rgba(1,28,64,0.06);
 }
 
 .nav-button:hover {
-  background: var(--luna-blue);
+  transform:
+    translateY(-2px);
+  background:
+    rgba(255,255,255,0.82);
+  box-shadow:
+    0 12px 24px rgba(1,28,64,0.12);
+}
+
+/* =========================
+   REGISTER BUTTON
+========================= */
+
+.nav-register {
+  background:
+    linear-gradient(
+      135deg,
+      var(--luna-blue),
+      var(--luna-dark)
+    );
   color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 16px 34px rgba(1, 28, 64, 0.18);
 }
-
-.nav-button:focus-visible {
-  outline: 3px solid rgba(38, 101, 140, 0.28);
-  outline-offset: 3px;
+.nav-register:hover {
+  background:
+    linear-gradient(
+      135deg,
+      var(--luna-dark),
+      var(--luna-deep)
+    );
+  color: white;
 }
-
-.nav-icon {
-  font-size: 18px;
-}
-
-/* ===== MAIN CONTENT ===== */
+/* =========================
+   HERO SECTION
+========================= */
 
 .home-content {
   flex: 1;
@@ -113,71 +171,107 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 2;
   text-align: center;
-  width: min(900px, 100%);
-  margin: 0 auto;
-  padding: clamp(36px, 8vh, 96px) 24px clamp(56px, 10vh, 112px);
+  position: relative;
+  z-index: 2;
+  width: min(980px, 100%);
+  margin: auto;
+  padding:
+    clamp(40px, 8vh, 90px)
+    24px;
 }
-
+/* =========================
+   GLASS HERO PANEL
+========================= */
+.home-hero-glass {
+  width: 100%;
+  padding:
+    clamp(36px, 6vw, 70px);
+  background:
+    rgba(255,255,255,0.30);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border:
+    1px solid rgba(255,255,255,0.38);
+  border-radius: 40px;
+  box-shadow:
+    0 20px 50px rgba(1,28,64,0.10);
+}
+/* =========================
+   LOGO
+========================= */
 .home-logo {
-  width: clamp(180px, 24vw, 280px);
-  margin-bottom: 28px;
-  filter: drop-shadow(0 18px 28px rgba(1, 28, 64, 0.16));
-}
-  
 
+  width:
+    clamp(180px, 24vw, 280px);
+  margin-bottom: 24px;
+  filter:
+    drop-shadow(
+      0 16px 26px rgba(1,28,64,0.14)
+    );
+  animation:
+    floatingLogo 4s ease-in-out infinite;
+}
+
+@keyframes floatingLogo {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+/* =========================
+   TITLE
+========================= */
 .home-title {
-  font-size: 32px;
-  line-height: 1.05;
+  font-size:
+    clamp(52px, 7vw, 76px);
+  line-height: 1.06;
   font-weight: 700;
+  letter-spacing: -2px;
   color: var(--luna-deep);
-  max-width: 760px;
-  margin: 10px;
+  margin-bottom: 24px;
 }
-
+/* =========================
+   SUBTITLE
+========================= */
 .home-subtitle {
-  font-size: clamp(18px, 2.2vw, 22px);
-  line-height: 1.55;
+  font-size:
+    clamp(20px, 2.2vw, 28px);
+  line-height: 1.7;
   color: var(--text-light);
-  max-width: 610px;
-  margin: 0 auto 34px;
+  max-width: 760px;
+  margin:
+    0 auto;
 }
-
-.home-main-btn {
-  padding: 14px 28px;
-  border-radius: var(--radius);
-  border: none;
-  background: var(--luna-blue);
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: all 0.25s ease;
-}
-
-.home-main-btn:hover {
-  background: var(--luna-dark);
-  transform: translateY(-3px) scale(1.04);
-}
-
-@media (max-width: 640px) {
+/* =========================
+    MOBILE
+========================= */
+@media (max-width: 768px) {
   .home-navbar {
-    align-items: flex-start;
+    width: calc(100% - 24px);
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+  }
+  .nav-right {
+    width: 100%;
     flex-direction: column;
   }
-
-  .nav-right,
   .nav-button {
     width: 100%;
   }
-
-  .nav-button {
-    justify-content: center;
+  .home-title {
+    font-size: 42px;
   }
-
-  .home-content {
-    justify-content: flex-start;
-    padding-top: 44px;
+  .home-subtitle {
+    font-size: 19px;
+  }
+  .home-hero-glass {
+    border-radius: 28px;
   }
 }
