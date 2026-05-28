@@ -1,49 +1,62 @@
 import { useNavigate } from "react-router-dom";
+import "../styles/Dashboard.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.title}>Medication Dashboard</h2>
+    <div className="dashboard-wrapper">
 
-      <div style={styles.buttonContainer}>
-        <button style={styles.button} onClick={() => navigate("/create-schedule")}>
-          Create Schedule
-        </button>
+      <div className="dashboard-header">
+        <div>
+          <h1 className="dashboard-title">
+            Medication Dashboard
+          </h1>
 
-        <button style={styles.button} onClick={() => navigate("/my-schedules")}>
-          My Schedules
-        </button>
+          <p className="dashboard-subtitle">
+            Manage your medications and stay healthy.
+          </p>
+        </div>
+      </div>
+
+      <div className="dashboard-grid">
+
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/create-schedule")}
+        >
+          <div className="dashboard-card-icon">
+            💊
+          </div>
+
+          <div className="dashboard-card-title">
+            Create Schedule
+          </div>
+
+          <div className="dashboard-card-text">
+            Add medications and create daily schedules.
+          </div>
+        </div>
+
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/my-schedules")}
+        >
+          <div className="dashboard-card-icon">
+            📅
+          </div>
+
+          <div className="dashboard-card-title">
+            My Schedules
+          </div>
+
+          <div className="dashboard-card-text">
+            View and manage your medication schedules.
+          </div>
+        </div>
 
       </div>
+
     </div>
   );
 }
-
-const styles = {
-  container: {
-    textAlign: "center",
-    padding: "40px",
-  },
-  title: {
-    fontSize: "28px",
-    marginBottom: "30px",
-  },
-  buttonContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "20px",
-    maxWidth: "300px",
-    margin: "0 auto",
-  },
-  button: {
-    padding: "12px 20px",
-    fontSize: "18px",
-    borderRadius: "8px",
-    border: "none",
-    cursor: "pointer",
-    backgroundColor: "#4A90E2",
-    color: "white",
-  },
-};
