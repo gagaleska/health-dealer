@@ -8,7 +8,7 @@ register.use(express.json())
 
 register.post("/", async (req, res, next) => {
     try {
-      const { first_name, last_name, email, password, doctorCode } = req.body
+      const { first_name, last_name, email, password, role, doctorCode } = req.body
 
       // Validate input
       if (!first_name || !last_name || !email || !password) {
@@ -22,10 +22,18 @@ register.post("/", async (req, res, next) => {
       }
 
       // Determine role based on doctorCode
-      let role = 0; // default to patient
-      if (doctorCode === "DOCTOR2026") {
-        role = 1; // for doctor
-      }
+      let finalRole = 0
+
+      if (Number(role) === 1) {
+
+        if (doctorCode !== "DOCTOR2026") {
+        return res.status(400).json({
+         error: "Invalid doctor code"
+       })
+   }
+
+  finalRole = 1
+}
 
       const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -35,13 +43,13 @@ register.post("/", async (req, res, next) => {
         last_name,
         email,
         hashedPassword,
-        role
+        finalRole
       );
 
       res.status(201).json({
         message: "User registered successfully",
         user_id: result.insertId,
-        role: role,
+        role: finalRole,
       });
     } 
     catch (err) {
