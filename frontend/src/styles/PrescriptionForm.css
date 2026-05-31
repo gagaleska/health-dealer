@@ -2,15 +2,15 @@
    WRAPPER
 ========================= */
 
-.register-wrapper {
+.prescription-wrapper {
 
   min-height: 100vh;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding:
+    clamp(28px, 4vw, 48px);
 
   position: relative;
+
   overflow: hidden;
 
   background:
@@ -23,6 +23,10 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* =========================
@@ -78,12 +82,12 @@
 }
 
 /* =========================
-   CARD
+   FORM CARD
 ========================= */
 
-.register-card {
+.prescription-card {
 
-  width: min(480px, 92vw);
+  width: min(700px, 100%);
 
   padding:
     clamp(28px, 4vw, 42px);
@@ -103,6 +107,12 @@
   box-shadow:
     0 18px 40px rgba(1,28,64,0.10);
 
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+
   position: relative;
 
   z-index: 2;
@@ -112,7 +122,7 @@
 
 /* subtle shine */
 
-.register-card::before {
+.prescription-card::before {
 
   content: "";
 
@@ -134,40 +144,25 @@
    TITLE
 ========================= */
 
-.register-title {
+.prescription-card h2 {
 
   text-align: center;
 
+  font-size:
+    clamp(32px, 4vw, 44px);
+
   color: var(--luna-deep);
 
-  font-size:
-    clamp(32px,4vw,42px);
-
-  font-weight: 700;
-
-  margin-bottom: 28px;
+  margin-bottom: 10px;
 
   letter-spacing: -1px;
-}
-
-/* =========================
-   FORM
-========================= */
-
-.register-form {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 16px;
 }
 
 /* =========================
    INPUTS
 ========================= */
 
-.register-input {
+.prescription-card input {
 
   height: 58px;
 
@@ -189,7 +184,7 @@
   transition: 0.2s ease;
 }
 
-.register-input:focus {
+.prescription-card input:focus {
 
   outline: none;
 
@@ -201,12 +196,39 @@
 }
 
 /* =========================
+   CHECKBOX
+========================= */
+
+.food-checkbox {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 10px 4px;
+
+  font-size: 16px;
+
+  color: var(--luna-dark);
+
+  font-weight: 500;
+}
+
+.food-checkbox input {
+
+  width: 20px;
+  height: 20px;
+
+  cursor: pointer;
+}
+
+/* =========================
    BUTTON
 ========================= */
 
-.register-button {
-
-  margin-top: 10px;
+.prescription-card button {
 
   height: 58px;
 
@@ -235,7 +257,7 @@
     0 10px 24px rgba(1,28,64,0.14);
 }
 
-.register-button:hover {
+.prescription-card button:hover {
 
   transform:
     translateY(-2px);
@@ -252,49 +274,23 @@
 }
 
 /* =========================
-   EXTRA TEXT
-========================= */
-
-.register-footer {
-
-  text-align: center;
-
-  margin-top: 18px;
-
-  color: var(--text-light);
-
-  font-size: 15px;
-}
-
-.register-footer a {
-
-  color: var(--luna-blue);
-
-  text-decoration: none;
-
-  font-weight: 600;
-}
-
-.register-footer a:hover {
-  text-decoration: underline;
-}
-
-/* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 768px) {
 
-  .register-card {
+  .prescription-wrapper {
+    padding: 20px;
+  }
 
-    width: calc(100% - 32px);
+  .prescription-card {
 
     border-radius: 26px;
 
     padding: 24px;
   }
 
-  .register-title {
+  .prescription-card h2 {
     font-size: 34px;
   }
 

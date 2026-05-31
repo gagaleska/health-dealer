@@ -4,112 +4,168 @@ import api from "../api/axios"
 import "../styles/RegisterView.css"
 
 export default function Register() {
+
+  const navigate = useNavigate()
+
   const [form, setForm] = useState({
     first_name: "",
     last_name: "",
     email: "",
     password: "",
-    doctor_code: ""
+    role: "0",
+    doctorCode: ""
   })
+
   const [message, setMessage] = useState("")
-  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
+
       const payload = {
         first_name: form.first_name,
         last_name: form.last_name,
         email: form.email,
         password: form.password,
+        role: Number(form.role)
       }
 
-      if (form.doctor_code.trim()) {
-        payload.doctor_code = form.doctor_code.trim()
+      if (form.role === "1") {
+        payload.doctorCode = form.doctorCode
       }
 
       await api.post("/register", payload)
 
-      navigate("/")
+      alert("Registration successful!")
+
+      navigate("/login")
+
     } catch (err) {
-      console.error("Register error:", err)
-      const errors = err.response?.data?.errors;
-      const validationMessage = errors
-        ? Object.values(errors).flat().join(" ")
-        : ""
+
+      console.error(err)
 
       setMessage(
-        validationMessage ||
-        err.response?.data?.message ||
-          err.response?.data?.error ||
-          err.message ||
-          "Registration failed. Please check your details and try again."
-      );
+        err.response?.data?.error ||
+        "Registration failed"
+      )
     }
-  };
+  }
 
   return (
     <div className="register-wrapper">
-      
+
       {/* Background circles */}
+
       <div className="bg-circle bg-circle-1"></div>
       <div className="bg-circle bg-circle-2"></div>
       <div className="bg-circle bg-circle-3"></div>
 
       <div className="register-card">
-        <h2 className="register-title">Create Account</h2>
 
-        <form onSubmit={handleSubmit} className="register-form">
+        <h2 className="register-title">
+          Create Account
+        </h2>
+
+        <form
+          onSubmit={handleSubmit}
+          className="register-form"
+        >
+
           <input
+            type="text"
             name="first_name"
             placeholder="First Name"
             value={form.first_name}
             onChange={handleChange}
             className="register-input"
+            required
           />
+
           <input
+            type="text"
             name="last_name"
             placeholder="Last Name"
             value={form.last_name}
             onChange={handleChange}
             className="register-input"
+            required
           />
+
           <input
-            name="email"
             type="email"
+            name="email"
             placeholder="Email"
             value={form.email}
             onChange={handleChange}
             className="register-input"
+            required
           />
+
           <input
-            name="password"
             type="password"
+            name="password"
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
             className="register-input"
+            required
           />
-          <input
-            name="doctor_code"
-            placeholder="Doctor Code (optional)"
-            value={form.doctor_code}
+
+          {/* ROLE SELECT */}
+
+          <select
+            name="role"
+            value={form.role}
             onChange={handleChange}
             className="register-input"
-          />
+          >
+            <option value="0">
+              Patient
+            </option>
 
-          <button type="submit" className="register-button">
+            <option value="1">
+              Doctor
+            </option>
+          </select>
+
+          {/* DOCTOR CODE */}
+
+          {form.role === "1" && (
+            <input
+              type="text"
+              name="doctorCode"
+              placeholder="Doctor Code"
+              value={form.doctorCode}
+              onChange={handleChange}
+              className="register-input"
+              required
+            />
+          )}
+
+          <button
+            type="submit"
+            className="register-button"
+          >
             Register
           </button>
+
         </form>
 
-        {message && <p className="register-message">{message}</p>}
+        {message && (
+          <p className="register-message">
+            {message}
+          </p>
+        )}
+
       </div>
     </div>
-  );
+  )
 }

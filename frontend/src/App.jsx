@@ -7,6 +7,9 @@ import CreateSchedule from "./pages/CreateSchedule"
 import MySchedules from "./pages/MySchedules"
 import ForgotPassword from "./pages/ForgotPassword"
 import ResetPassword from "./pages/ResetPassword"
+import DoctorDashboard from "./pages/DoctorDashboard"
+import PatientDetails from "./pages/PatientDetails"
+import PrescriptionForm from "./pages/PrescriptionForm"
 
 function App() {
   return (
@@ -22,6 +25,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-schedule" element={<CreateSchedule />} />
         <Route path="/my-schedules" element={<MySchedules />} />
+
+        <Route path="/doctor" element={<DoctorDashboard />} />
+        <Route path="/doctor/patients/:id" element={<PatientDetails />} />
+        <Route path="/doctor/patients/:id/prescribe" element={<PrescriptionForm />} />
 
 
       </Routes>
