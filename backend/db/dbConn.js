@@ -201,17 +201,19 @@ dataPool.UpdateUserMedication = (id, dosage, with_food, start_date, end_date, sc
 
 
 // Delete a medication schedule for a user
-dataPool.DeleteUserMedication = (id) => {
+dataPool.DeleteUserMedication = (id, userId) => {
   return new Promise((resolve, reject) => {
     conn.query(
-      'DELETE FROM UserMedication WHERE id = ?',
-      [id],
+      `DELETE FROM UserMedication
+       WHERE id = ?
+       AND user_id = ?`,
+      [id, userId],
       (err, res) => {
-        if(err) return reject(err)
-          resolve(res)
+        if (err) return reject(err)
+        resolve(res)
       }
     )
-  }) 
+  })
 }
 
 // Set a medication schedule as taken
@@ -324,5 +326,58 @@ dataPool.GetMissedMedications = () => {
     )
   })
 }
+
+
+// Get all patients for the doctor to view
+dataPool.GetAllPatients = () => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `SELECT
+        id,
+        first_name,
+        last_name,
+        email
+      FROM User
+      WHERE role = 0
+      ORDER BY last_name, first_name`,
+      (err, res) => {
+        if (err) return reject(err)
+        resolve(res)
+      }
+    )
+  })
+}
+
+dataPool.GetPatientSchedules = (patientId) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `SELECT
+        um.id,
+        m.name AS medication_name,
+        um.dosage,
+        um.start_date,
+        um.end_date,
+        um.with_food,
+        GROUP_CONCAT(
+          st.schedule_time
+          ORDER BY st.schedule_time
+        ) AS schedule_times
+      FROM UserMedication um
+      JOIN Medication m
+        ON um.medication_id = m.id
+      LEFT JOIN ScheduleTime st
+        ON st.user_medication_id = um.id
+      WHERE um.user_id = ?
+      GROUP BY um.id`,
+      [patientId],
+      (err, res) => {
+        if (err) return reject(err)
+        resolve(res)
+      }
+    )
+  })
+}
+
+
 
 module.exports = dataPool

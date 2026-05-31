@@ -1,4 +1,3 @@
-
 const express = require("express")
 const userMed = express.Router()
 const db = require("../db/dbConn")
@@ -70,15 +69,17 @@ userMed.get("/", auth, async (req, res) => {
     console.error("Error fetching user schedules:", err)
     res.status(500).json({ error: "Server error" })
   }
-});
+})
 
 // UPDATE schedule
 userMed.put("/:id", auth, async (req, res) => {
   try {
     const { dosage, with_food, start_date, end_date, schedule_times } = req.body
 
-    if (!dosage || !start_date || !end_date || !Array.isArray(schedule_times))
-      return res.status(400).json({ error: "Missing required fields" })
+    if (!dosage || !start_date || !Array.isArray(schedule_times)) {
+      return res.status(400).json({error: "Missing required fields"
+  })
+}
 
     await db.UpdateUserMedication(
       req.params.id,
@@ -99,7 +100,7 @@ userMed.put("/:id", auth, async (req, res) => {
 // DELETE schedule
 userMed.delete("/:id", auth, async (req, res) => {
   try {
-    await db.DeleteUserMedication(req.params.id)
+    await db.DeleteUserMedication(req.params.id,req.user.id)
     res.json({ message: "Medication schedule deleted" })
   } catch (err) {
     console.error("Error deleting medication schedule:", err)

@@ -14,7 +14,7 @@ login.post("/", async (req, res, next) => {
 
     // Validate input
     if (!email || !password || role === undefined)
-      return res.status(400).json({ error: "Missing email or password" })
+      return res.status(400).json({ error: "Missing email, password or role" })
 
     // Find user by email
     const users = await db.GetUser(email)
