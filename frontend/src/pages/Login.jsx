@@ -25,6 +25,7 @@ export default function Login() {
 
       // Save token
       localStorage.setItem("token", res.data.token)
+      localStorage.setItem("role", res.data.role)
 
       // Redirect to dashboard
       navigate("/dashboard")
