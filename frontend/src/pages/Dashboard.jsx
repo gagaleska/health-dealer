@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import LogoutButton from "../components/LogoutButton";
 import "../styles/Dashboard.css";
 
 export default function Dashboard() {
@@ -13,6 +14,9 @@ export default function Dashboard() {
        <div className="dashboard-container">
 
         <div className="dashboard-header">
+          
+          <LogoutButton />
+          
           <div>
             <h1 className="dashboard-title">
               Medication Dashboard

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import LogoutButton from "../components/LogoutButton";
 import api from "../api/axios"
 import "../styles/CreateScheduleView.css"
 
@@ -55,20 +56,30 @@ export default function CreateSchedule() {
     }
   };
 
-  return (
-    <div>
-      <h2>Create Medication Schedule</h2>
+ return (
+  <div className="create-schedule-wrapper">
+
+    <LogoutButton />
+
+    <div className="create-schedule-card">
+
+      <h2 className="create-schedule-title">
+        Create Medication Schedule
+      </h2>
 
       <form onSubmit={handleSubmit}>
+
         <input
+          className="create-input"
           type="text"
           name="medication_name"
-          placeholder="Medication name"
+          placeholder="Medication Name"
           value={form.medication_name}
           onChange={handleChange}
         />
 
         <input
+          className="create-input"
           type="text"
           name="dosage"
           placeholder="Dosage"
@@ -76,7 +87,7 @@ export default function CreateSchedule() {
           onChange={handleChange}
         />
 
-        <label>
+        <label className="create-checkbox">
           <input
             type="checkbox"
             name="with_food"
@@ -86,38 +97,68 @@ export default function CreateSchedule() {
           Take with food
         </label>
 
+        <label className="create-label">
+          Start Date
+        </label>
+
         <input
+          className="create-input"
           type="date"
           name="start_date"
           value={form.start_date}
           onChange={handleChange}
         />
 
+        <label className="create-label">
+          End Date
+        </label>
+
         <input
+          className="create-input"
           type="date"
           name="end_date"
           value={form.end_date}
           onChange={handleChange}
         />
 
-        <h4>Schedule Times</h4>
+        <label className="create-label">
+          Schedule Times
+        </label>
+
         {scheduleTimes.map((time, index) => (
           <input
             key={index}
+            className="create-input"
             type="time"
             value={time}
             onChange={(e) => updateTime(e.target.value, index)}
           />
         ))}
 
-        <button type="button" onClick={addTimeField}>
-          Add another time
+        <button
+          type="button"
+          className="add-time-btn"
+          onClick={addTimeField}
+        >
+          + Add Schedule Time
         </button>
 
-        <button type="submit">Create Schedule</button>
+        <button
+          type="submit"
+          className="create-submit-btn"
+        >
+          Create Schedule
+        </button>
+
       </form>
 
-      <p>{message}</p>
+      {message && (
+        <p className="create-message">
+          {message}
+        </p>
+      )}
+
     </div>
-  );
+  </div>
+)
 }

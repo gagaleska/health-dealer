@@ -116,6 +116,7 @@
   backdrop-filter: blur(10px);
   box-shadow:
     0 6px 18px rgba(1,28,64,0.06);
+  gap: 8px;
 }
 
 .nav-button:hover {

@@ -1,0 +1,59 @@
+/* =========================
+   LOGOUT BUTTON
+========================= */
+
+.logout-btn {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  height: 50px;
+  padding: 0 22px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.52);
+
+  color: var(--luna-dark);
+
+  font-size: 17px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;   /* space between icon and text */
+
+  backdrop-filter: blur(10px);
+
+  transition: 0.25s ease;
+}
+
+.logout-icon {
+  font-size: 20px;
+}
+
+.logout-btn:hover {
+
+  transform: translateY(-2px);
+
+  background:
+    rgba(255,255,255,0.82);
+
+  box-shadow:
+    0 12px 24px rgba(1,28,64,0.12);
+}
+
+@media (max-width: 768px) {
+
+  .logout-btn {
+
+    position: static;
+
+    margin-bottom: 20px;
+  }
+}

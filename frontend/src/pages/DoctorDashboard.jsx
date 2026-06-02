@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import LogoutButton from "../components/LogoutButton";
 import api from "../api/axios"
 import "../styles/DoctorDashboard.css"
 
@@ -31,10 +32,6 @@ export default function DoctorDashboard() {
 
   return (
     <div className="doctor-wrapper">
-
-      <div className="bg-circle bg-circle-1"></div>
-      <div className="bg-circle bg-circle-2"></div>
-      <div className="bg-circle bg-circle-3"></div>
 
       <h2 className="doctor-title">
         Doctor Dashboard
