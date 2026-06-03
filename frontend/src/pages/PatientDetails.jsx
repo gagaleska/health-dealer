@@ -26,13 +26,11 @@ export default function PatientDetails() {
   return (
     <div className="patient-details-wrapper">
 
-      <div className="bg-circle bg-circle-1"></div>
-      <div className="bg-circle bg-circle-2"></div>
-      <div className="bg-circle bg-circle-3"></div>
-
       <h2 className="details-title">
         Patient Schedule
       </h2>
+
+      <div className="details-actions">
 
       <button
         className="prescribe-top-btn"
@@ -44,6 +42,15 @@ export default function PatientDetails() {
       >
         + Prescribe Medication
       </button>
+
+      <button
+        className="back-btn"
+        onClick={() => navigate("/doctor")}
+      >
+        ← Back to Doctor Dashboard
+      </button>
+
+      </div>
 
       <div className="schedule-list">
 

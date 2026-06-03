@@ -17,41 +17,6 @@
   background-attachment: fixed;
 }
 
-/* FLOATING BLOBS */
-
-.bg-circle {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.20;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.bg-circle-1 {
-  width: 320px;
-  height: 320px;
-  background: var(--luna-light);
-  top: -120px;
-  left: -100px;
-}
-
-.bg-circle-2 {
-  width: 280px;
-  height: 280px;
-  background: var(--luna-mid);
-  bottom: -120px;
-  right: -120px;
-}
-
-.bg-circle-3 {
-  width: 240px;
-  height: 240px;
-  background: var(--luna-blue);
-  top: 40%;
-  left: 72%;
-}
-
 /* TITLE */
 .doctor-title {
   text-align: center;
@@ -241,6 +206,19 @@
       var(--luna-deep)
     );
 }
+
+.doctor-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+   margin-top: 40px;   /* adds space above */
+  margin-bottom: 24px;
+}
+
+
+
+
 
 /* EMPTY STATE */
 

@@ -263,6 +263,19 @@
   font-size: 24px;
 }
 
+.details-actions {
+  display: flex;
+  flex-direction: column; /* puts them one under another */
+  align-items: center;    /* center horizontally */
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.prescribe-top-btn,
+.back-btn {
+  width: 380px;
+}
+
 /* =========================
    MOBILE
 ========================= */

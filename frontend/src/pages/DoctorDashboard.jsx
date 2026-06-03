@@ -102,6 +102,15 @@ export default function DoctorDashboard() {
         </div>
       )}
 
+      <div className="doctor-actions">
+  <button
+  className="back-btn"
+  onClick={() => navigate("/dashboard")}
+>
+  ← Dashboard
+</button>
+</div>
+
     </div>
   )
 }
