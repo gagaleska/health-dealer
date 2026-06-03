@@ -119,4 +119,21 @@ userMed.post("/:id/taken", auth, async (req, res) => {
   }
 })
 
+userMed.get("/:id", auth, async (req, res) => {
+  try {
+    const medication =
+      await db.GetUserMedicationById(
+        req.params.id,
+        req.user.id
+      )
+    res.json(medication)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({
+      error: "Server error"
+    })
+  }
+})
+
+
 module.exports = userMed

@@ -166,6 +166,47 @@ dataPool.GetUserMedication = (user_id, today) => {
   })
 }
 
+dataPool.GetUserMedicationById = (
+  id,
+  user_id
+) => {
+
+  return new Promise((resolve, reject) => {
+
+    conn.query(
+      `
+      SELECT
+        um.id AS user_medication_id,
+        um.dosage,
+        um.with_food,
+        um.start_date,
+        um.end_date,
+        m.name AS medication_name,
+        st.schedule_time
+
+      FROM UserMedication um
+
+      JOIN Medication m
+      ON m.id = um.medication_id
+
+      JOIN ScheduleTime st
+      ON st.user_medication_id = um.id
+
+      WHERE um.id = ?
+      AND um.user_id = ?
+      `,
+      [id, user_id],
+
+      (err, res) => {
+
+        if (err) return reject(err)
+
+        resolve(res)
+      }
+    )
+  })
+}
+
 // Update a medication schedule for a user
 dataPool.UpdateUserMedication = (id, dosage, with_food, start_date, end_date, schedule_times) => {
   return new Promise(async (resolve, reject) => {
@@ -201,19 +242,19 @@ dataPool.UpdateUserMedication = (id, dosage, with_food, start_date, end_date, sc
 
 
 // Delete a medication schedule for a user
-dataPool.DeleteUserMedication = (id, userId) => {
-  return new Promise((resolve, reject) => {
-    conn.query(
-      `DELETE FROM UserMedication
-       WHERE id = ?
-       AND user_id = ?`,
-      [id, userId],
-      (err, res) => {
-        if (err) return reject(err)
-        resolve(res)
-      }
-    )
-  })
+dataPool.DeleteUserMedication = async (id, userId) => {
+  await conn.promise().query(
+    `DELETE FROM ScheduleTime
+      WHERE user_medication_id = ?`,
+    [id]
+  )
+  const [result] = await conn.promise().query(
+    `DELETE FROM UserMedication
+      WHERE id = ?
+      AND user_id = ?`,
+    [id, userId]
+  )
+  return result
 }
 
 // Set a medication schedule as taken
@@ -275,6 +316,22 @@ dataPool.AddEmergencyContact = (user_id, contact_name, contact_email) => {
       `INSERT INTO Emergency_Contact (user_id, contact_name, contact_email)
       VALUES (?, ?, ?)`,
       [user_id, contact_name, contact_email],
+      (err, res) => {
+        if (err) return reject(err)
+        resolve(res)
+      }
+    )
+  })
+}
+
+dataPool.UpdateEmergencyContact = ( user_id, contact_name, contact_email ) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `UPDATE Emergency_Contact
+       SET contact_name = ?,
+           contact_email = ?
+       WHERE user_id = ?`,
+      [contact_name, contact_email, user_id],
       (err, res) => {
         if (err) return reject(err)
         resolve(res)
