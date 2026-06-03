@@ -17,41 +17,6 @@
   background-attachment: fixed;
 }
 
-/* FLOATING BLOBS */
-
-.bg-circle {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.20;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.bg-circle-1 {
-  width: 320px;
-  height: 320px;
-  background: var(--luna-light);
-  top: -120px;
-  left: -100px;
-}
-
-.bg-circle-2 {
-  width: 280px;
-  height: 280px;
-  background: var(--luna-mid);
-  bottom: -120px;
-  right: -120px;
-}
-
-.bg-circle-3 {
-  width: 240px;
-  height: 240px;
-  background: var(--luna-blue);
-  top: 40%;
-  left: 72%;
-}
-
 /* TITLE */
 
 .schedule-title {
@@ -116,6 +81,16 @@
       transparent 55%
     );
   pointer-events: none;
+}
+
+/* Edit and delete buttons actions */
+.med-actions {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+
+  display: flex;
+  gap: 12px;
 }
 
 /* MEDICATION NAME */
@@ -191,6 +166,7 @@
 
 /* BUTTON */
 
+ /* Taken button */
 .taken-btn {
 
   min-width: 120px;
@@ -246,6 +222,107 @@
   pointer-events: none;
 }
 
+/* Edit and delete buttons */
+
+.action-btn {
+
+  min-width: 120px;
+  height: 52px;
+
+  border: none;
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--luna-blue),
+      var(--luna-dark)
+    );
+
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+
+  box-shadow:
+    0 10px 24px rgba(1,28,64,0.14);
+}
+
+.action-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 28px rgba(1,28,64,0.18);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--luna-dark),
+      var(--luna-deep)
+    );
+}
+
+.delete-btn {
+  background:
+    linear-gradient(
+      135deg,
+      #d32f2f,
+      #b71c1c
+    );
+}
+
+.delete-btn:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #b71c1c,
+      #8e0000
+    );
+}
+
+/* Back button */
+.schedule-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.back-btn {
+  width: 280px;
+  height: 64px;
+
+  border: none;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.75);
+
+  color: var(--luna-dark);
+
+  font-size: 22px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+
+  box-shadow:
+    0 10px 24px rgba(1,28,64,0.08);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+
+  background: white;
+
+  box-shadow:
+    0 14px 28px rgba(1,28,64,0.12);
+}
+
 /* EMPTY STATE */
 
 .no-schedules {
@@ -256,6 +333,8 @@
   z-index: 2;
   margin-top: 80px;
 }
+
+
 
 /* MOBILE */
 

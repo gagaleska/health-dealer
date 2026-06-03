@@ -332,6 +332,53 @@
     0 16px 32px rgba(1,28,64,0.18);
 }
 
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.back-btn {
+
+  height: 64px;
+
+  border: none;
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.75);
+
+  color: var(--luna-dark);
+
+  font-size: 24px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+
+  box-shadow:
+    0 10px 24px rgba(1,28,64,0.08);
+}
+
+.back-btn:hover {
+
+  transform: translateY(-2px);
+
+  background: white;
+
+  box-shadow:
+    0 14px 28px rgba(1,28,64,0.12);
+}
+
+.form-actions .back-btn,
+.form-actions .create-submit-btn {
+  width: 280px;
+  height: 64px;
+  margin-top: 0;
+  flex: none;
+}
+
 /* =========================
    MOBILE
 ========================= */

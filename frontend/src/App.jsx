@@ -10,6 +10,9 @@ import ResetPassword from "./pages/ResetPassword"
 import DoctorDashboard from "./pages/DoctorDashboard"
 import PatientDetails from "./pages/PatientDetails"
 import PrescriptionForm from "./pages/PrescriptionForm"
+import EmergencyContact from "./pages/EmergencyContact"
+import EditMedication from "./pages/EditMedication"
+
 
 function App() {
   return (
@@ -30,6 +33,10 @@ function App() {
         <Route path="/doctor/patients/:id" element={<PatientDetails />} />
         <Route path="/doctor/patients/:id/prescribe" element={<PrescriptionForm />} />
 
+        <Route path="/emergency-contact" element={<EmergencyContact />}/>
+
+        <Route path="/edit-medication/:id" element={<EditMedication />}
+/>
 
       </Routes>
     </BrowserRouter>

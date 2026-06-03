@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import api from "../api/axios"
 import "../styles/MyScheduleView.css"
+import { useNavigate } from "react-router-dom"
 
 export default function MySchedules() {
   const [schedules, setSchedules] = useState([])
 
   const today = new Date().toLocaleDateString("en-CA")
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchSchedules()
@@ -33,14 +35,38 @@ export default function MySchedules() {
     }
   }
 
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm(
+    "Delete this medication schedule?"
+  )
+  if (!confirmed) return
+  try {
+    await api.delete(`/user-medications/${id}`)
+    fetchSchedules()
+  } catch (err) {
+  console.error("DELETE ERROR:", err)
+  console.error(err.response?.data)
+
+  alert(
+    err.response?.data?.error ||
+    "Failed to delete medication"
+  )
+}
+}
+
+const handleEdit = (id) => {
+  navigate(`/edit-medication/${id}`)
+}
+
   console.log("Schedules:", schedules)
 
   // GROUP BY MEDICATION
   const grouped = schedules.reduce((acc, item) => {
-    const medId = item.medication_id
-
-    if (!acc[medId]) {
+  const medId = item.user_medication_id
+  
+  if (!acc[medId]) {
       acc[medId] = {
+        user_medication_id: item.user_medication_id,
         medication_name: item.medication_name,
         dosage: item.dosage,
         with_food: item.with_food,
@@ -73,10 +99,6 @@ export default function MySchedules() {
   return (
     <div className="schedule-wrapper">
 
-      <div className="bg-circle bg-circle-1"></div>
-      <div className="bg-circle bg-circle-2"></div>
-      <div className="bg-circle bg-circle-3"></div>
-
       <h2 className="schedule-title">Your Medication Schedule</h2>
 
       <div className="schedule-list">
@@ -85,6 +107,22 @@ export default function MySchedules() {
             <h3 className="med-name">{med.medication_name}</h3>
             <p className="med-dosage">{med.dosage}</p>
             {med.with_food && <p className="med-food">Take with food</p>}
+
+<div className="med-actions">
+  <button
+    className="action-btn"
+    onClick={() => handleEdit(med.user_medication_id)}
+  >
+    Edit
+  </button>
+
+  <button
+    className="action-btn delete-btn"
+    onClick={() => handleDelete(med.user_medication_id)}
+  >
+    Delete
+  </button>
+</div>
 
             <div className="time-list">
               {med.times.map((t) => {
@@ -118,6 +156,16 @@ export default function MySchedules() {
           </div>
         ))}
       </div>
+
+    <div className="schedule-footer">
+  <button
+    className="back-btn"
+    onClick={() => navigate("/dashboard")}
+  >
+    ← Back
+  </button>
+</div>
+
     </div>
   )
 }

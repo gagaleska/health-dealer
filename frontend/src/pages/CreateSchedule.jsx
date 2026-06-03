@@ -143,12 +143,24 @@ export default function CreateSchedule() {
           + Add Schedule Time
         </button>
 
-        <button
-          type="submit"
-          className="create-submit-btn"
-        >
-          Create Schedule
-        </button>
+        <div className="form-actions">
+
+  <button
+    type="button"
+    className="back-btn"
+    onClick={() => navigate(-1)}
+  >
+    ← Back
+  </button>
+
+  <button
+    type="submit"
+    className="create-submit-btn"
+  >
+    Create Schedule
+  </button>
+
+</div>
 
       </form>
 

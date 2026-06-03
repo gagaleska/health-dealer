@@ -64,6 +64,25 @@ export default function Dashboard() {
             </div>
           </div>
 
+          <div
+            className="dashboard-card"
+            onClick={() => navigate("/emergency-contact")}
+         >
+            <div className="dashboard-card-icon">
+             🚨
+            </div>
+
+            <div className="dashboard-card-title">
+              Emergency Contact
+            </div>
+
+            <div className="dashboard-card-text">
+              Add or update a trusted person who will be notified if medications are repeatedly missed.
+            </div>
+          </div>
+
+
+
           {role === 1 && (
             <div
               className="dashboard-card"

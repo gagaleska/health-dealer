@@ -1,0 +1,168 @@
+/* PAGE WRAPPER */
+.emergency-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  background:
+    linear-gradient(
+      rgba(245,250,253,0.76),
+      rgba(245,250,253,0.82)
+    ),
+    url("../assets/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* FLOATING BLOBS */
+.emergency-wrapper::before,
+.emergency-wrapper::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.22;
+  z-index: 0;
+}
+
+.emergency-wrapper::before {
+  width: 320px;
+  height: 320px;
+  background: var(--luna-light);
+  top: -120px;
+  left: -120px;
+}
+
+.emergency-wrapper::after {
+  width: 280px;
+  height: 280px;
+  background: var(--luna-mid);
+  bottom: -100px;
+  right: -100px;
+}
+
+/* CARD */
+.emergency-card {
+  width: 100%;
+  max-width: 500px;
+  padding: clamp(32px, 5vw, 52px);
+  border-radius: 36px;
+  background: rgba(255,255,255,0.34);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255,255,255,0.42);
+  box-shadow: 0 20px 50px rgba(1,28,64,0.12);
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+/* TITLE */
+.emergency-title {
+  margin-bottom: 12px;
+  color: var(--luna-deep);
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+/* DESCRIPTION */
+.emergency-subtitle {
+  color: var(--text-light);
+  margin-bottom: 28px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* FORM */
+.emergency-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* INPUTS */
+.emergency-input {
+  height: 58px;
+  padding: 0 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(38,101,140,0.14);
+  background: rgba(255,255,255,0.68);
+  backdrop-filter: blur(10px);
+  font-size: 18px;
+  color: var(--text);
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.emergency-input::placeholder {
+  color: rgba(44,57,69,0.52);
+}
+
+.emergency-input:focus {
+  border-color: var(--luna-blue);
+  box-shadow: 0 0 0 4px rgba(38,101,140,0.10);
+}
+
+/* BUTTON */
+.emergency-button {
+  margin-top: 8px;
+  height: 58px;
+  border: none;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--luna-blue),
+      var(--luna-dark)
+    );
+  color: white;
+  font-size: 19px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow:
+    0 12px 28px rgba(1,28,64,0.14);
+}
+
+.emergency-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 32px rgba(1,28,64,0.18);
+  background:
+    linear-gradient(
+      135deg,
+      var(--luna-dark),
+      var(--luna-deep)
+    );
+}
+
+/* SUCCESS MESSAGE */
+.emergency-message {
+  margin-top: 18px;
+  color: #1d7f4e;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .emergency-card {
+    border-radius: 28px;
+    padding: 30px 24px;
+  }
+
+  .emergency-title {
+    font-size: 32px;
+  }
+
+  .emergency-input,
+  .emergency-button {
+    height: 54px;
+    font-size: 17px;
+  }
+}
