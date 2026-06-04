@@ -7,7 +7,6 @@ const api = axios.create({
 // Automatically attach token
 api.interceptors.request.use((config) => {
   const publicRoutes = ["/login", "/register"];
-  const isPublicRoute = publicRoutes.some((route) => config.url === route);
 
   if (config.url.startsWith("/login") || config.url.startsWith("/register")) {
   return config;
