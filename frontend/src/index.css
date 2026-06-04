@@ -1,0 +1,287 @@
+/* has to be imported, so Poppins font can be loaded */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+:root {
+  --luna-light:#A7EBF2;
+  --luna-mid: #54ACBF;
+  --luna-blue: #26658C;
+  --luna-dark: #023859;
+  --luna-deep: #011C40;
+
+  /* TEXT */
+  --text: #2C3945;              /* dark gray text */
+  --text-light: #61707D;        /* lighter gray for secondary text */
+  --text-heading: #012A43;     /* heading text */
+
+  /* BACKGROUND */
+  --bg: #F5FAFD;                
+  --bg-card: rgba(255, 255, 255, 0.72);           
+  --bg-card-solid: #ffffff;  
+  
+  /* BORDERS & SHADOWS */
+  --border: rgba(38, 101, 140, 0.12);
+  --shadow-soft: 0 8px 24px rgba(1, 28, 64, 0.08);
+  --shadow-hover: 0 12px 28px rgba(1, 28, 64, 0.14);
+  
+  /* Accent colors */
+  --accent: var(--luna-blue);
+  --accent-hover: var(--luna-dark);
+
+  /* Status colors */
+  --success: #57C785;
+  --warning: #F4A261;
+  --danger: #E76F51;
+
+  /* Glass effect */
+  --glass-bg: rgba(255,255,255,0.62);
+  --glass-border:rgba(255,255,255,0.35);
+  --glass-shadow: 0 8px 32px rgba(1,28,64,0.12);
+
+  /* UI elements */
+  --radius-xl: 32px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-sm: 14px;
+
+  /* Typography */
+  --sans: "Poppins", system-ui, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font-family: var(--sans);
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--text);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+}
+
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* BODY */
+
+body {
+  background:
+    linear-gradient(
+      rgba(255,255,255,0.74),
+      rgba(255,255,255,0.74)
+    ),
+    url("./assets/background.png");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/* ROOT */
+
+#root {
+  min-height: 100vh;
+}
+
+/* TYPOGRAPHY */
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  color: var(--heading);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  @media (max-width:768px) {
+    font-size: 42px;
+  }
+}
+
+h2 {
+  font-size: 38px;
+  @media (max-width:768px) {
+    font-size: 30px;
+  }
+}
+
+h3 {
+  font-size: 28px;
+  @media (max-width:768px) {
+    font-size: 24px;
+  }
+}
+
+p {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--text-light);
+  @media (max-width:768px) {
+    font-size: 18px;
+  }
+}
+
+/* BUTTONS */
+
+button {
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px 22px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.08);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* PRIMARY BUTTON */
+
+.primary-btn {
+  background: linear-gradient(
+    135deg,
+    var(--luna-blue),
+    var(--luna-dark)
+  );
+  color: white;
+}
+
+/* INPUTS */
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border:
+    1px solid rgba(38,101,140,0.14);
+  background:
+    rgba(255,255,255,0.78);
+  backdrop-filter: blur(10px);
+  font-size: 18px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--luna-blue);
+  box-shadow:
+    0 0 0 4px rgba(38,101,140,0.10);
+}
+
+/* GLASS CARD */
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  border:
+    1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-xl);
+}
+
+/* PAGE CONTAINER */
+
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 24px;
+}
+
+/* FLEX UTILITIES */
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* FLOATING BACKGROUND BLOBS */
+
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.22;
+  z-index: -1;
+}
+
+.blob-1 {
+
+  width: 320px;
+  height: 320px;
+  background: var(--luna-light);
+  top: -120px;
+  left: -100px;
+}
+
+.blob-2 {
+  width: 280px;
+  height: 280px;
+  background: var(--luna-mid);
+  bottom: -120px;
+  right: -100px;
+}
+
+.blob-3 {
+  width: 220px;
+  height: 220px;
+  background: var(--luna-blue);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--luna-mid);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--luna-blue);
+}
+
