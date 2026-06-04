@@ -20,8 +20,7 @@ cron.schedule("0 0 * * *", async () => {
     await db.query(`
       DELETE FROM UserMedication
       WHERE end_date IS NOT NULL
-            AND um.end_date < CURDATE()`)
-
+            AND end_date < CURDATE()`)
 
     console.log("Midnight reset completed")
   } catch (err) {

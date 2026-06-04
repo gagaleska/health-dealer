@@ -6,12 +6,10 @@ cron.schedule("0 * * * *", async () => {
 
   try {
     console.log("Checking emergency alerts...")
-
     const users =
       await db.GetMissedMedications()
-
     for (const user of users) {
-      let message = `Hello ${user.contact_name},${user.first_name} may have missed multiple medications today.
+      let message = `Hello ${user.contact_name}, ${user.first_name} may have missed multiple medications today.
       Please check on them.`
 
       await sendEmail(
@@ -19,7 +17,6 @@ cron.schedule("0 * * * *", async () => {
         "Emergency Medication Alert",
         message
       )
-
       console.log(`Emergency email sent to ${user.contact_email}`)
     }
   } catch (err) {

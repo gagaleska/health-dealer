@@ -40,8 +40,7 @@ reset.post("/request", async (req, res) => {
       }
     )
 
-    const resetLink =
-      `http://localhost:5173/reset-password/${token}`
+    const resetLink = `http://88.200.63.148:30029/reset-password/${token}`
 
     await sendEmail(
       user.email,
@@ -54,9 +53,7 @@ reset.post("/request", async (req, res) => {
     })
 
   } catch (err) {
-
     console.log(err)
-
     res.status(500).json({
       error: "Server error"
     })
@@ -65,9 +62,7 @@ reset.post("/request", async (req, res) => {
 
 // Reset password using token
 reset.post("/:token", async (req, res) => {
-
   try {
-
     const { token } = req.params
     const { password } = req.body
 
@@ -85,7 +80,6 @@ reset.post("/:token", async (req, res) => {
 
     const hashedPassword =
       await bcrypt.hash(password, 10)
-
     await db.UpdatePassword(
       decoded.id,
       hashedPassword
@@ -94,11 +88,8 @@ reset.post("/:token", async (req, res) => {
     res.json({
       message: "Password updated"
     })
-
   } catch (err) {
-
     console.log(err)
-
     res.status(400).json({
       error: "Invalid or expired token"
     })
