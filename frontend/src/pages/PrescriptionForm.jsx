@@ -70,10 +70,6 @@ export default function PrescriptionForm() {
   return (
     <div className="prescription-wrapper">
 
-      <div className="bg-circle bg-circle-1"></div>
-      <div className="bg-circle bg-circle-2"></div>
-      <div className="bg-circle bg-circle-3"></div>
-
       <form
         className="prescription-card"
         onSubmit={submitPrescription}

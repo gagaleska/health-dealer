@@ -94,9 +94,7 @@ export default function DoctorDashboard() {
               >
                 View Schedule
               </button>
-
             </div>
-
           ))}
 
         </div>

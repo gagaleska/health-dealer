@@ -10,11 +10,9 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-wrapper">
-
        <div className="dashboard-container">
-
         <div className="dashboard-header">
-          
+    
           <LogoutButton />
           
           <div>
@@ -103,9 +101,7 @@ export default function Dashboard() {
           )}
 
         </div>
-
       </div>
-
     </div>
   )
 }

@@ -19,42 +19,6 @@
   background-attachment: fixed;
 }
 
-/* FLOATING BLOBS */
-
-.bg-circle {
-
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.22;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.bg-circle-1 {
-  width: 380px;
-  height: 380px;
-  background: var(--luna-light);
-  top: -120px;
-  left: -120px;
-}
-
-.bg-circle-2 {
-  width: 340px;
-  height: 340px;
-  background: var(--luna-mid);
-  bottom: -120px;
-  right: -120px;
-}
-
-.bg-circle-3 {
-  width: 260px;
-  height: 260px;
-  background: var(--luna-blue);
-  top: 45%;
-  left: 68%;
-}
-
 /* NAVBAR */
 
 .home-navbar {

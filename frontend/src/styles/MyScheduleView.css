@@ -225,39 +225,29 @@
 /* Edit and delete buttons */
 
 .action-btn {
-
   min-width: 120px;
   height: 52px;
-
   border: none;
   border-radius: 16px;
-
   background:
     linear-gradient(
       135deg,
       var(--luna-blue),
       var(--luna-dark)
     );
-
   color: white;
   font-size: 17px;
   font-weight: 600;
-
   cursor: pointer;
-
   transition: 0.25s ease;
-
   box-shadow:
     0 10px 24px rgba(1,28,64,0.14);
 }
 
 .action-btn:hover {
-
   transform: translateY(-2px);
-
   box-shadow:
     0 14px 28px rgba(1,28,64,0.18);
-
   background:
     linear-gradient(
       135deg,
@@ -295,30 +285,21 @@
 .back-btn {
   width: 280px;
   height: 64px;
-
   border: none;
   border-radius: 18px;
-
   background: rgba(255,255,255,0.75);
-
   color: var(--luna-dark);
-
   font-size: 22px;
   font-weight: 700;
-
   cursor: pointer;
-
   transition: 0.25s ease;
-
   box-shadow:
     0 10px 24px rgba(1,28,64,0.08);
 }
 
 .back-btn:hover {
   transform: translateY(-2px);
-
   background: white;
-
   box-shadow:
     0 14px 28px rgba(1,28,64,0.12);
 }
@@ -333,7 +314,6 @@
   z-index: 2;
   margin-top: 80px;
 }
-
 
 
 /* MOBILE */

@@ -10,10 +10,6 @@ export default function Home() {
 
     return (
       <div className="home-wrapper">
-        {/* Background circles */}
-        <div className="bg-circle bg-circle-1"></div>
-        <div className="bg-circle bg-circle-2"></div>
-        <div className="bg-circle bg-circle-3"></div>
 
         {/* nav bar */}
         <nav className="home-navbar">

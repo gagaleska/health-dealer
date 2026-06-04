@@ -1,277 +1,143 @@
-/* =========================
-   WRAPPER
-========================= */
+/* WRAPPER */
 
 .register-wrapper {
-
   min-height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: relative;
   overflow: hidden;
-
   background:
     linear-gradient(
       rgba(245,250,253,0.78),
       rgba(245,250,253,0.84)
     ),
     url("../assets/background.jpg");
-
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
 
-/* =========================
-   FLOATING BLOBS
-========================= */
-
-.bg-circle {
-
-  position: absolute;
-
-  border-radius: 50%;
-
-  filter: blur(90px);
-
-  opacity: 0.20;
-
-  z-index: 0;
-
-  pointer-events: none;
-}
-
-.bg-circle-1 {
-
-  width: 320px;
-  height: 320px;
-
-  background: var(--luna-light);
-
-  top: -120px;
-  left: -100px;
-}
-
-.bg-circle-2 {
-
-  width: 280px;
-  height: 280px;
-
-  background: var(--luna-mid);
-
-  bottom: -120px;
-  right: -120px;
-}
-
-.bg-circle-3 {
-
-  width: 240px;
-  height: 240px;
-
-  background: var(--luna-blue);
-
-  top: 40%;
-  left: 72%;
-}
-
-/* =========================
-   CARD
-========================= */
+/* CARD */
 
 .register-card {
-
   width: min(480px, 92vw);
-
   padding:
     clamp(28px, 4vw, 42px);
-
   background:
     rgba(255,255,255,0.34);
-
   backdrop-filter: blur(26px);
-
   -webkit-backdrop-filter: blur(26px);
-
   border:
     1px solid rgba(255,255,255,0.40);
-
   border-radius: 32px;
-
   box-shadow:
     0 18px 40px rgba(1,28,64,0.10);
-
   position: relative;
-
   z-index: 2;
-
   overflow: hidden;
 }
 
 /* subtle shine */
-
 .register-card::before {
-
   content: "";
-
   position: absolute;
-
   inset: 0;
-
   background:
     linear-gradient(
       135deg,
       rgba(255,255,255,0.20),
       transparent 55%
     );
-
   pointer-events: none;
 }
 
-/* =========================
-   TITLE
-========================= */
-
+/* TITLE */
 .register-title {
-
   text-align: center;
-
   color: var(--luna-deep);
-
   font-size:
     clamp(32px,4vw,42px);
-
   font-weight: 700;
-
   margin-bottom: 28px;
-
   letter-spacing: -1px;
 }
 
-/* =========================
-   FORM
-========================= */
+/* FORM */
 
 .register-form {
-
   display: flex;
-
   flex-direction: column;
-
   gap: 16px;
 }
 
-/* =========================
-   INPUTS
-========================= */
+/* INPUTS */
 
 .register-input {
-
   height: 58px;
-
   border: none;
-
   border-radius: 18px;
-
   padding: 0 18px;
-
   background:
     rgba(255,255,255,0.65);
-
   backdrop-filter: blur(12px);
-
   font-size: 16px;
-
   color: var(--luna-dark);
-
   transition: 0.2s ease;
 }
 
 .register-input:focus {
-
   outline: none;
-
   background:
     rgba(255,255,255,0.90);
-
   box-shadow:
     0 0 0 3px rgba(84,172,191,0.15);
 }
 
-/* =========================
-   BUTTON
-========================= */
-
+/* BUTTON */
 .register-button {
-
   margin-top: 10px;
-
   height: 58px;
-
   border: none;
-
   border-radius: 18px;
-
   background:
     linear-gradient(
       135deg,
       var(--luna-blue),
       var(--luna-dark)
     );
-
   color: white;
-
   font-size: 17px;
-
   font-weight: 600;
-
   cursor: pointer;
-
   transition: 0.25s ease;
-
   box-shadow:
     0 10px 24px rgba(1,28,64,0.14);
 }
 
 .register-button:hover {
-
   transform:
     translateY(-2px);
-
   background:
     linear-gradient(
       135deg,
       var(--luna-dark),
       var(--luna-deep)
     );
-
   box-shadow:
     0 14px 28px rgba(1,28,64,0.18);
 }
 
-/* =========================
-   EXTRA TEXT
-========================= */
-
 .register-footer {
-
   text-align: center;
-
   margin-top: 18px;
-
   color: var(--text-light);
-
   font-size: 15px;
 }
 
 .register-footer a {
-
   color: var(--luna-blue);
-
   text-decoration: none;
-
   font-weight: 600;
 }
 
@@ -279,9 +145,7 @@
   text-decoration: underline;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media (max-width: 768px) {
 

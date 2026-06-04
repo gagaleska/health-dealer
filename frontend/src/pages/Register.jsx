@@ -62,12 +62,6 @@ export default function Register() {
   return (
     <div className="register-wrapper">
 
-      {/* Background circles */}
-
-      <div className="bg-circle bg-circle-1"></div>
-      <div className="bg-circle bg-circle-2"></div>
-      <div className="bg-circle bg-circle-3"></div>
-
       <div className="register-card">
 
         <h2 className="register-title">
