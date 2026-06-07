@@ -2,6 +2,8 @@ const express = require("express")
 require("dotenv").config()
 const db = require("./db/dbConn.js")
 const cors = require("cors")
+const path = require("path")
+
 const register = require("./routes/register")
 const login = require("./routes/login")
 const userMedications = require("./routes/userMedications")
@@ -16,7 +18,7 @@ require("./cron/cronEmergency")
 
 const app = express() // instance of express
 const port = process.env.PORT || 2907
-
+const reactBuildPath = path.join(__dirname, "dist", "frontend-build")
 app.use(cors({
   origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -30,9 +32,12 @@ app.use("/user-medications", userMedications)
 app.use("/emergency-contact", emergencyContact)
 app.use("/doctor", doctorRoutes)
 
-app.get("/", (req, res) => {
-  res.send("this text must be changed to a static file")
-});
+
+app.use(express.static(reactBuildPath))
+
+app.get("/*splat", (req, res) => {
+  res.sendFile(path.join(reactBuildPath, "index.html"))
+})
 
 ///App listening on port
 app.listen(port, () => {
